@@ -3,29 +3,51 @@ function Book(name,pages,read,author) {
     this.pages = pages,
     this.read = read,
     this.author = author
+    this.cardInfo = '';
     
 } 
-const hobbit = new Book('The Hobbit', 295, true , 'J.R.R Tolkien')
+
 
 
 Book.prototype.info = function() {
     if (this.read === true) {
-        return `${this.name} by ${this.author}, ${this.pages}, read`
+        this.cardInfo = `${this.name} by ${this.author}, ${this.pages}, read`
     } else {
-        return `${this.name} by ${this.author}, ${this.pages}, not read yet`
+        this.cardInfo = `${this.name} by ${this.author}, ${this.pages}, not read yet`
     }
     
 }
+Book.prototype.readStatus = function() {
+    this.read = !this.read
+    this.info();
+}
 
-const bookLibrary = [hobbit];
+const bookLibrary = [];
 
 addBook = (book) => {
-    bookLibrary.push(book)
+    console.log(bookLibrary.length)
+    if (bookLibrary.length > 0){
+        let exists = bookLibrary.some( (el) => el.name === book.name);
+        console.log(exists)
+        if (exists) {
+            console.log('ya existe :3')
+        } else {
+            bookLibrary.push(book)
+            paintBooks();
+    }
+    } else {
+        console.log(book)
+        bookLibrary.push(book)
+        paintBooks();
+    }
+    
+    
 }
 const bookContainer = document.getElementById("books");
 const createBookButton = document.createElement("button");
 createBookButton.innerText = 'CREATE BOOK'
-createBookButton.addEventListener('click', () => {
+createBookButton.addEventListener('click', (event) => {
+    event.preventDefault();
     createBookButton.remove()
     const bookForm = document.createElement('form');
     
@@ -39,6 +61,7 @@ createBookButton.addEventListener('click', () => {
             const label = document.createElement('label');
             label.innerText = 'Author: '
             label.setAttribute('for', 'author');
+            
             formDiv.appendChild(label);
 
 
@@ -109,22 +132,55 @@ createBookButton.addEventListener('click', () => {
     }
     const submitButton = document.createElement('button');
     submitButton.innerText = 'SUBMIT'
-    submitButton.addEventListener('click',addBook());
+    
     bookForm.appendChild(submitButton);
+    submitButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const book = [];
+        const author = document.getElementById('author').value
+        const name = document.getElementById('name').value
+        const pages = document.getElementById('pages').value
+        const read =  document.getElementById('read').checked;
+        const key = name.replace(/\s+/g, '');
+        book.push(key);
+        book[key] = new Book(name, pages, read, author);
+        addBook(book[key]);
+        
+        
+        
+    });
 })
 bookContainer.appendChild(createBookButton);
 const paintBooks = () => {
-    bookLibrary.map( (book) => {
-        const bookCard = document.createElement("div");
-        bookCard.classList.add("bookCard");
-        bookCard.innerText = `${book.name}
-                              ${book.pages}
-                              ${book.author}
-        
-        `
-        bookContainer.appendChild(bookCard)
-        
+    let lastBook = bookLibrary.find( (book) => book.name === bookLibrary[bookLibrary.length - 1].name)     
+      
+    lastBook.info();      
+    const bookCard = document.createElement("div");
+    bookCard.classList.add("bookCard");
+    bookCard.innerText = `${lastBook.cardInfo}`;
+    bookContainer.appendChild(bookCard);
+
+    const buttonContainer = document.createElement('div');
+    bookContainer.appendChild(buttonContainer)
+    
+    const removeSelfButton = document.createElement('button');
+    removeSelfButton.addEventListener('click', () => {
+        bookCard.remove()
+        buttonContainer.remove();
+        let indexBook = bookLibrary.indexOf(lastBook);
+        bookLibrary.splice(indexBook, 1)
+    });
+    removeSelfButton.innerText = 'REMOVE ITEM'
+    buttonContainer.appendChild(removeSelfButton)
+
+    const readButton = document.createElement('button');
+    readButton.addEventListener('click', ()=> {
+        lastBook.readStatus();
+        bookCard.innerText = `${lastBook.cardInfo}`;
     })
+    readButton.innerText = "READ"
+    buttonContainer.appendChild(readButton);
 }
+
 
 
