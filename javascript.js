@@ -50,7 +50,7 @@ createBookButton.addEventListener('click', (event) => {
     event.preventDefault();
     createBookButton.remove()
     const bookForm = document.createElement('form');
-    
+    bookForm.classList.add('bookForm')
     bookContainer.appendChild(bookForm);
     for (i = 1; i < 5; i++) {
         if (i === 1) {
@@ -68,7 +68,8 @@ createBookButton.addEventListener('click', (event) => {
             const input = document.createElement('input');
             input.setAttribute('type', 'text');
             input.setAttribute('placeholder', "author's name");
-            input.setAttribute('id', 'author')
+            input.setAttribute('id', 'author');
+            input.setAttribute('autocomplete', 'off');
             formDiv.appendChild(input);
 
             
@@ -87,7 +88,8 @@ createBookButton.addEventListener('click', (event) => {
             const input = document.createElement('input');
             input.setAttribute('type', 'text');
             input.setAttribute('placeholder', "book's name: ");
-            input.setAttribute('id', 'name')
+            input.setAttribute('id', 'name');
+            input.setAttribute('autocomplete', 'off')
             formDiv.appendChild(input);
             
         } else if (i === 3) {
@@ -103,14 +105,16 @@ createBookButton.addEventListener('click', (event) => {
             const input = document.createElement('input');
             input.setAttribute('type', 'number');
             input.setAttribute('placeholder', "pages: ");
-            input.setAttribute('id', 'pages')
+            input.setAttribute('id', 'pages');
+            input.setAttribute('min', '1')
             formDiv.appendChild(input);
+            
             
             
             
         } else {
             const formDiv = document.createElement('div');
-            formDiv.classList.add("checkbox");
+            formDiv.classList.add('checkboxContainer')
             bookForm.appendChild(formDiv);
 
 
@@ -123,6 +127,7 @@ createBookButton.addEventListener('click', (event) => {
             checkbox.setAttribute('type', 'checkbox');
             checkbox.setAttribute('placeholder', "author's name");
             checkbox.setAttribute('id', 'read')
+            checkbox.classList.add('checkbox')
             formDiv.appendChild(checkbox);
             
         }

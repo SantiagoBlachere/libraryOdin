@@ -1,4 +1,116 @@
+@font-face {
+    font-family: angerGoth;
+    src: url('./AngerStyles.ttf');
+}
+@font-face {
+    font-family: wrathGoth;
+    src: url('./WrathStyles.ttf');
+}
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: angerGoth;
+    background-color: #7d443c;
+}
 .bookCard {
     background-color: blue;
     color: red;
 }
+header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: wrathGoth;
+}
+p {
+    font-size: 20px;
+}
+#books {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    
+}
+.bookForm {
+    width: 25%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    font-size: 30px;
+
+}
+.input{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+
+.checkboxContainer {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+.checkbox{
+    justify-self: flex-start;
+    align-self: center;
+    cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+  background: lightgray;
+  height: 16px;
+  width: 16px;
+  border: 1px solid white;
+  color: white;
+    
+}
+
+.checkbox:checked {
+    background-color: black;
+    
+}
+
+
+  
+  
+  
+  
+  
+  
+input {
+    border: none;
+    background-color: #9eb2c4;
+    height: 30px;
+    padding-left: 10px;
+    
+}
+input:focus{
+    background-color: #927f4c;
+    border: 0;
+    outline:none;
+}
+input::placeholder {
+    color: #151a1b;
+    opacity: 40%;
+}
+/* remove arrows from number input */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+
+
+
+
+
