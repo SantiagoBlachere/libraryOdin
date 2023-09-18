@@ -11,7 +11,7 @@ function Book(name,pages,read,author) {
 
 Book.prototype.info = function() {
     if (this.read === true) {
-        this.cardInfo = `${this.name} by ${this.author}, ${this.pages}, read`
+        this.cardInfo = `${this.name} by ${this.author}, ${this.pages} pages, read`
     } else {
         this.cardInfo = `${this.name} by ${this.author}, ${this.pages}, not read yet`
     }
@@ -45,7 +45,9 @@ addBook = (book) => {
 }
 const bookContainer = document.getElementById("books");
 const createBookButton = document.createElement("button");
-createBookButton.innerText = 'CREATE BOOK'
+createBookButton.innerText = `CREATE BOOK,
+                              if you dare..`
+createBookButton.classList.add('addButton')
 createBookButton.addEventListener('click', (event) => {
     event.preventDefault();
     createBookButton.remove()
@@ -66,10 +68,13 @@ createBookButton.addEventListener('click', (event) => {
 
 
             const input = document.createElement('input');
+            input.required = 'true'
+            input.classList.add('input');
             input.setAttribute('type', 'text');
             input.setAttribute('placeholder', "author's name");
             input.setAttribute('id', 'author');
             input.setAttribute('autocomplete', 'off');
+            
             formDiv.appendChild(input);
 
             
@@ -86,6 +91,8 @@ createBookButton.addEventListener('click', (event) => {
             
             
             const input = document.createElement('input');
+            input.required = 'true'
+            input.classList.add('input');
             input.setAttribute('type', 'text');
             input.setAttribute('placeholder', "book's name: ");
             input.setAttribute('id', 'name');
@@ -103,6 +110,8 @@ createBookButton.addEventListener('click', (event) => {
             formDiv.appendChild(label);
             
             const input = document.createElement('input');
+            input.required = 'true'
+            input.classList.add('input');
             input.setAttribute('type', 'number');
             input.setAttribute('placeholder', "pages: ");
             input.setAttribute('id', 'pages');
@@ -137,6 +146,7 @@ createBookButton.addEventListener('click', (event) => {
     }
     const submitButton = document.createElement('button');
     submitButton.innerText = 'SUBMIT'
+    submitButton.classList.add('submitButton')
     
     bookForm.appendChild(submitButton);
     submitButton.addEventListener('click', (e) => {
@@ -156,6 +166,9 @@ createBookButton.addEventListener('click', (event) => {
     });
 })
 bookContainer.appendChild(createBookButton);
+
+const addedBooksSection = document.querySelector(".addedBooks");
+
 const paintBooks = () => {
     let lastBook = bookLibrary.find( (book) => book.name === bookLibrary[bookLibrary.length - 1].name)     
       
@@ -163,10 +176,11 @@ const paintBooks = () => {
     const bookCard = document.createElement("div");
     bookCard.classList.add("bookCard");
     bookCard.innerText = `${lastBook.cardInfo}`;
-    bookContainer.appendChild(bookCard);
+    addedBooksSection.appendChild(bookCard);
 
     const buttonContainer = document.createElement('div');
-    bookContainer.appendChild(buttonContainer)
+    buttonContainer.classList.add('buttonContainer')
+    addedBooksSection.appendChild(buttonContainer)
     
     const removeSelfButton = document.createElement('button');
     removeSelfButton.addEventListener('click', () => {
@@ -180,11 +194,16 @@ const paintBooks = () => {
 
     const readButton = document.createElement('button');
     readButton.addEventListener('click', ()=> {
+        
         lastBook.readStatus();
+        
         bookCard.innerText = `${lastBook.cardInfo}`;
+        bookCard.appendChild(buttonContainer);
+        
     })
     readButton.innerText = "READ"
     buttonContainer.appendChild(readButton);
+    bookCard.appendChild(buttonContainer)
 }
 
 

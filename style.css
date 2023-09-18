@@ -6,6 +6,10 @@
     font-family: wrathGoth;
     src: url('./WrathStyles.ttf');
 }
+@font-face {
+    font-family: ancient;
+    src: url('./Long_Shot.ttf');
+}
 * {
     padding: 0;
     margin: 0;
@@ -14,10 +18,7 @@ body {
     font-family: angerGoth;
     background-color: #7d443c;
 }
-.bookCard {
-    background-color: blue;
-    color: red;
-}
+
 header {
     display: flex;
     align-items: center;
@@ -29,6 +30,7 @@ p {
 }
 #books {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     padding-top: 20px;
     
@@ -59,7 +61,7 @@ p {
   -moz-appearance: none;
   appearance: none;
   outline: 0;
-  background: lightgray;
+  background:#9eb2c4;
   height: 16px;
   width: 16px;
   border: 1px solid white;
@@ -68,7 +70,9 @@ p {
 }
 
 .checkbox:checked {
-    background-color: black;
+    background-color:#927f4c;
+    border: 1px solid black;
+    
     
 }
 
@@ -86,12 +90,12 @@ input {
     padding-left: 10px;
     
 }
-input:focus{
+.input:focus{
     background-color: #927f4c;
     border: 0;
     outline:none;
 }
-input::placeholder {
+.input::placeholder {
     color: #151a1b;
     opacity: 40%;
 }
@@ -109,8 +113,66 @@ input[type=number] {
 }
 
 
+.addButton {
+    border: none;
+    font-size: 30px;
+    font-family: ancient;
+    background-color:#a88983;
+    padding: 50px;
+    width: 80%;
+}
+
+.addButton:hover {
+    background-color: #151a1b;
+    color: white;
+}
 
 
 
+.addedBooks {
+    width: 100%;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25%, 20%));
+    gap: 5px;
+    justify-content: center;
+    background-color: #7d443c;
+    
+    
+    
+    
+}
 
 
+.bookCard {
+    
+    width: 100%;
+    height: 200px;
+    font-family: ancient;
+    font-size: 20px;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    
+    background-color: #7d443c;
+    gap: 10px;
+    
+    
+}
+
+.buttonContainer {
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    
+}
+.buttonContainer > button {
+    background-color: #927f4c;
+        
+}
+.submitButton {
+    margin-top: 10px;
+    background-color: #7d443c;
+    border: 1px solid black;
+}
+.submitButton:hover {
+    background-color: #927f4c;
+}
