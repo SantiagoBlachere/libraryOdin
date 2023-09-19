@@ -96,7 +96,8 @@ createBookButton.addEventListener('click', (event) => {
             input.setAttribute('type', 'text');
             input.setAttribute('placeholder', "book's name: ");
             input.setAttribute('id', 'name');
-            input.setAttribute('autocomplete', 'off')
+            input.setAttribute('autocomplete', 'off');
+            input.setAttribute("required", "")
             formDiv.appendChild(input);
             
         } else if (i === 3) {
@@ -144,8 +145,10 @@ createBookButton.addEventListener('click', (event) => {
 
         
     }
-    const submitButton = document.createElement('button');
+    const submitButton = document.createElement('input');
     submitButton.innerText = 'SUBMIT'
+    submitButton.setAttribute('type', 'submit')
+    submitButton.setAttribute('required', 'true')
     submitButton.classList.add('submitButton')
     
     bookForm.appendChild(submitButton);
@@ -156,10 +159,16 @@ createBookButton.addEventListener('click', (event) => {
         const name = document.getElementById('name').value
         const pages = document.getElementById('pages').value
         const read =  document.getElementById('read').checked;
-        const key = name.replace(/\s+/g, '');
-        book.push(key);
-        book[key] = new Book(name, pages, read, author);
-        addBook(book[key]);
+        if (!author || !name || !pages) {
+            alert('Please fill out all required fields!')
+            return
+        } else {
+            const key = name.replace(/\s+/g, '');
+            book.push(key);
+            book[key] = new Book(name, pages, read, author);
+            addBook(book[key]);
+        }
+        
         
         
         
