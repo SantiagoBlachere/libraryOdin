@@ -1,25 +1,23 @@
-function Book(name,pages,read,author) {
-    this.name = name,
-    this.pages = pages,
-    this.read = read,
-    this.author = author
-    this.cardInfo = '';
-    
-} 
 
 
-
-Book.prototype.info = function() {
-    if (this.read === true) {
-        this.cardInfo = `${this.name} by ${this.author}, ${this.pages} pages, read`
-    } else {
-        this.cardInfo = `${this.name} by ${this.author}, ${this.pages}, not read yet`
+class Book {
+    constructor(name,pages,read,author) {
+        this.name = name,
+        this.pages = pages,
+        this.read = read,
+        this.author = author
     }
-    
-}
-Book.prototype.readStatus = function() {
-    this.read = !this.read
-    this.info();
+    info() {
+        if (this.read === true) {
+            this.cardInfo = `${this.name} by ${this.author}, ${this.pages} pages, read`
+        } else {
+            this.cardInfo = `${this.name} by ${this.author}, ${this.pages}, not read yet`
+        }
+    }
+    readStatus() {
+        this.read = !this.read;
+        this.info()
+    }
 }
 
 const bookLibrary = [];
